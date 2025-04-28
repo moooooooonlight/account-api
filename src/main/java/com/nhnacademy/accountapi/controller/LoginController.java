@@ -20,15 +20,24 @@ public class LoginController {
 
 
     @GetMapping("/login")
-    public ResponseEntity<Void> login(@RequestParam String userId,
-                                      @RequestParam String userPassword){
+    public HttpStatus login(@RequestParam String userId,
+                            @RequestParam String userPassword){
         if(userService.match(userId,userPassword)){
-            return ResponseEntity.ok().build();
+            return HttpStatus.OK;
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        return HttpStatus.NOT_FOUND;
     }
 
-    @PostMapping("/signup")
+//    @GetMapping("/login")
+//    public ResponseEntity<Void> login(@RequestParam String userId,
+//                                      @RequestParam String userPassword){
+//        if(userService.match(userId,userPassword)){
+//            return ResponseEntity.ok().build();
+//        }
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//    }
+
+    @PostMapping("/login")
     public ResponseDTO signup(@RequestBody CreateUserRequest createUserRequest){
         if(Objects.isNull(createUserRequest)){
             throw new IllegalArgumentException();
