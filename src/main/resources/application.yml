@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: Account-API
+server:
+  port: 7070
+  config:
+    import:
+      - snippet/jpa-logging.yml
