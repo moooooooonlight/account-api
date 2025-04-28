@@ -43,13 +43,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserCUD(String userId,CUD cud) {
-        if(Objects.isNull(cud)){
+        if (Objects.isNull(cud)) {
             throw new IllegalArgumentException();
         }
 
-        userRepository.updateUserCUD(userId,cud);
+        User user = findUserById(userId);
+        userRepository.save(user); // enum 그대로 넘기기
     }
-
 
     @Override
     public boolean match(String userId, String userPassword) {

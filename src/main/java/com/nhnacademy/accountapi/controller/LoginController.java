@@ -7,12 +7,14 @@ import com.nhnacademy.accountapi.domain.model.User;
 import com.nhnacademy.accountapi.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class LoginController {
@@ -36,6 +38,11 @@ public class LoginController {
 
         User user = createUserRequest.makeUser();
         userService.saveUser(user);
+        log.debug("id={}",user.getUserId());
+        log.debug("password={}",user.getUserPassword());
+        log.debug("email={}",user.getUserEmail());
+        log.debug("name={}",user.getUserName());
+        log.debug("cud={}",user.getUserCud());
 
         ResponseDTO response = new ResponseDTO(HttpStatus.OK, "로그인 성공");
         return response;

@@ -4,13 +4,13 @@ import com.nhnacademy.accountapi.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface UserRepository extends JpaRepository<User, String>{
     boolean existsByUserId(String userId);
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE User u SET u.userCud = :cud WHERE u.userId = :userId ")
-    int updateUserCUD(String userId, CUD cud);
-
+    @Query("UPDATE User u SET u.userCud = :cud WHERE u.userId = :userId")
+    void updateCudByUserId(CUD cud, String userId);
 }
