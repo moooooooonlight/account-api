@@ -4,6 +4,7 @@ import com.nhnacademy.accountapi.domain.dto.ResponseDTO;
 import com.nhnacademy.accountapi.domain.request.CreateUserRequest;
 import com.nhnacademy.accountapi.domain.model.User;
 import com.nhnacademy.accountapi.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class LoginController {
     private final UserService userService;
 
+    @Operation(summary = "로그인 페이지 요청", description = "유저 로그인 페이지 요청 시 사용되는 api")
     @GetMapping("/login")
     public ResponseEntity<Void> login(@RequestParam String userId,
                                       @RequestParam String userPassword){
@@ -27,6 +29,7 @@ public class LoginController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    @Operation(summary = "로그인 요청", description = "유저 로그인 요청 시 사용되는 api")
     @PostMapping("/login")
     public ResponseDTO signup(@RequestBody CreateUserRequest createUserRequest){
         if(Objects.isNull(createUserRequest)){
