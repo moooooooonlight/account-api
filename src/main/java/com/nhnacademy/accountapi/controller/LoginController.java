@@ -18,24 +18,14 @@ import java.util.Objects;
 public class LoginController {
     private final UserService userService;
 
-
     @GetMapping("/login")
-    public HttpStatus login(@RequestParam String userId,
-                            @RequestParam String userPassword){
+    public ResponseEntity<Void> login(@RequestParam String userId,
+                                      @RequestParam String userPassword){
         if(userService.match(userId,userPassword)){
-            return HttpStatus.OK;
+            return ResponseEntity.ok().build();
         }
-        return HttpStatus.NOT_FOUND;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
-//    @GetMapping("/login")
-//    public ResponseEntity<Void> login(@RequestParam String userId,
-//                                      @RequestParam String userPassword){
-//        if(userService.match(userId,userPassword)){
-//            return ResponseEntity.ok().build();
-//        }
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//    }
 
     @PostMapping("/login")
     public ResponseDTO signup(@RequestBody CreateUserRequest createUserRequest){

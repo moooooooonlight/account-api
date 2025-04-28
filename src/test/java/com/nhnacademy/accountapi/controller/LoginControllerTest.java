@@ -57,7 +57,7 @@ public class LoginControllerTest {
 
         Mockito.doNothing().when(userService).saveUser(any(User.class));
 
-        mockMvc.perform(post("/signup")
+        mockMvc.perform(post("/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
@@ -66,7 +66,7 @@ public class LoginControllerTest {
 
     @Test
     void testSignUp_IllegalArg() throws Exception {
-        mockMvc.perform(post("/signup")
+        mockMvc.perform(post("/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("null"))
                 .andExpect(status().isBadRequest());
